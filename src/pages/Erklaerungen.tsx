@@ -1,10 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-
 const Erklaerungen = () => {
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Header />
       
       <main id="main-content" className="flex-1 container mx-auto px-4 py-12">
@@ -13,7 +11,7 @@ const Erklaerungen = () => {
         <div className="max-w-3xl space-y-8">
           <Card>
             <CardHeader>
-              <CardTitle>Ihre Rechte gegenüber VNB</CardTitle>
+              <CardTitle>Die Aufgaben und Pflichten der VNB</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground">
@@ -75,8 +73,6 @@ const Erklaerungen = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Erklaerungen;
