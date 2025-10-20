@@ -15,8 +15,7 @@ const Erklaerungen = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground">
-                Als Projektierer, Anlagenbetreiber oder Bürger haben Sie verschiedene Rechte 
-                gegenüber Verteilnetzbetreibern. Diese Sektion wird ausführliche Informationen enthalten zu:
+                Verteilnetzbetreiber haben verschiedene Pflichten gegenüber Projektierern, Anlagenbetreibern und Anschlussnehmern. Hier werden für die verschiedenen Aufgabenbereiche ein Überblick gegeben werden:
               </p>
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                 <li>Anspruch auf diskriminierungsfreien Netzzugang (EnWG §20)</li>
