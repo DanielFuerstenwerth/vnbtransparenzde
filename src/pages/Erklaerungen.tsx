@@ -58,9 +58,7 @@ const Erklaerungen = () => {
               </div>
               <div>
                 <h3 className="font-semibold mb-2">...</h3>
-                <p className="text-sm text-muted-foreground">
-                  [Platzhalter – Bundesnetzagentur und Landesregulierungsbehörden]
-                </p>
+                
               </div>
             </CardContent>
           </Card>
