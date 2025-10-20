@@ -1,0 +1,104 @@
+import { useParams, Link } from "react-router-dom";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+
+const NewsDetail = () => {
+  const { slug } = useParams();
+
+  // Dummy content - will be replaced with Markdown loader
+  const article = {
+    title: "Warum VNB-Transparenz jetzt zählt",
+    date: "2025-10-20",
+    author: "VNB-Transparenz Team",
+    content: `
+Die Energiewende steht und fällt mit der Geschwindigkeit, mit der erneuerbare Energien ans Netz angeschlossen werden. 
+Verteilnetzbetreiber (VNB) spielen dabei eine zentrale Rolle – doch ihre Performance ist für Projektierer, 
+Kommunen und die Öffentlichkeit oft kaum nachvollziehbar.
+
+## Warum Transparenz wichtig ist
+
+Ohne klare Kennzahlen und Vergleichsmöglichkeiten können ineffiziente Prozesse nicht identifiziert werden. 
+VNB-Transparenz schafft die Grundlage für:
+
+- **Öffentlichen Druck**: Netzbetreiber mit schlechter Performance werden sichtbar
+- **Best Practice Sharing**: Erfolgreiche VNBs können als Vorbild dienen
+- **Politische Steuerung**: Regulierungsbehörden erhalten bessere Datengrundlagen
+
+## Unsere Mission
+
+Mit dieser Plattform wollen wir ~800 deutsche Verteilnetzbetreiber vergleichbar machen. 
+Wir bewerten sie in drei Kategorien:
+
+1. **Dezentrale Energiewende**: Wie schnell werden PV/Wind-Anlagen angeschlossen?
+2. **Digitalisierung**: Wie modern sind Prozesse und Schnittstellen?
+3. **Flexible Anschlüsse**: Werden innovative Anschlusskonzepte angeboten?
+
+## Nächste Schritte
+
+In den kommenden Wochen veröffentlichen wir ein ausführliches Hintergrundpapier zur Methodik. 
+Parallel bauen wir die Datenbank aus – und dabei sind wir auf Ihre Hilfe angewiesen.
+
+**Haben Sie Erfahrungen mit einem VNB gemacht?** [Teilen Sie Ihre Daten mit uns →](/mitmachen)
+    `
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      
+      <main id="main-content" className="flex-1">
+        <article className="container mx-auto px-4 py-12 max-w-3xl">
+          <Link to="/news" className="text-primary hover:text-accent transition-colors inline-flex items-center gap-2 mb-6">
+            ← Zurück zu News
+          </Link>
+          
+          <header className="mb-8">
+            <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
+            <div className="flex gap-4 text-sm text-muted-foreground">
+              <time dateTime={article.date}>{article.date}</time>
+              <span>•</span>
+              <span>{article.author}</span>
+            </div>
+          </header>
+
+          <div className="prose prose-lg max-w-none">
+            {article.content.split('\n\n').map((paragraph, index) => {
+              if (paragraph.startsWith('## ')) {
+                return <h2 key={index} className="text-2xl font-bold mt-8 mb-4">{paragraph.replace('## ', '')}</h2>;
+              } else if (paragraph.startsWith('1. ') || paragraph.startsWith('- ')) {
+                const items = paragraph.split('\n');
+                return (
+                  <ul key={index} className="list-disc pl-6 mb-4 space-y-2">
+                    {items.map((item, i) => (
+                      <li key={i}>{item.replace(/^[1-9]\.\s|-\s/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</li>
+                    ))}
+                  </ul>
+                );
+              }
+              return (
+                <p key={index} className="mb-4 text-foreground/90 leading-relaxed">
+                  {paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-primary hover:text-accent">$1</a>')}
+                </p>
+              );
+            })}
+          </div>
+
+          <div className="mt-12 p-6 bg-muted rounded-lg">
+            <h3 className="font-bold mb-2">Mitmachen</h3>
+            <p className="text-muted-foreground mb-4">
+              Helfen Sie uns, die Datenbasis zu erweitern. Teilen Sie Ihre Erfahrungen mit Verteilnetzbetreibern.
+            </p>
+            <Link to="/mitmachen">
+              <Button>Jetzt Daten liefern</Button>
+            </Link>
+          </div>
+        </article>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default NewsDetail;
