@@ -84,15 +84,6 @@ Parallel bauen wir die Datenbank aus – und dabei sind wir auf Ihre Hilfe angew
             })}
           </div>
 
-          <div className="mt-12 p-6 bg-muted rounded-lg">
-            <h3 className="font-bold mb-2">Mitmachen</h3>
-            <p className="text-muted-foreground mb-4">
-              Helfen Sie uns, die Datenbasis zu erweitern. Teilen Sie Ihre Erfahrungen mit Verteilnetzbetreibern.
-            </p>
-            <Link to="/mitmachen">
-              <Button>Jetzt Daten liefern</Button>
-            </Link>
-          </div>
         </article>
       </main>
 
