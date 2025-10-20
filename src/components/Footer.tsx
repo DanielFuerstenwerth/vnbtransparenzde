@@ -1,15 +1,11 @@
 import { Link } from "react-router-dom";
-
 const Footer = () => {
-  return (
-    <footer className="border-t border-border bg-muted mt-16">
+  return <footer className="border-t border-border bg-muted mt-16">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="font-bold text-foreground mb-3">VNB-Transparenz</h3>
-            <p className="text-sm text-muted-foreground">
-              Transparenz über die Performance deutscher Verteilnetzbetreiber
-            </p>
+            <p className="text-sm text-muted-foreground">Transparenz über  Verteilnetzbetreiber</p>
           </div>
           
           <div>
@@ -70,8 +66,6 @@ const Footer = () => {
           <p>© {new Date().getFullYear()} VNB-Transparenz. Keine amtliche Stelle.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
