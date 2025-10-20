@@ -93,10 +93,7 @@ const Methodik = () => {
                 <li>• Offizielle Berichte (BNetzA, Landesregulierungsbehörden)</li>
                 <li>• Medienberichte und Recherchen</li>
               </ul>
-              <p className="mt-4 text-sm text-muted-foreground">
-                Alle Bewertungen sind durch Evidenzlinks nachvollziehbar. 
-                Bei fehlenden Daten wird "keine Daten" angezeigt (grau).
-              </p>
+              <p className="mt-4 text-sm text-muted-foreground">Bei fehlenden Daten wird &quot;keine Daten&quot; angezeigt (grau).</p>
             </CardContent>
           </Card>
 
