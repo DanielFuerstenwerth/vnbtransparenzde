@@ -34,14 +34,12 @@ const Erklaerungen = () => {
               <CardTitle>Links zu Leitfäden und weiteren Informationen für die betrachteten Themen</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Hier finden Sie bald praktische Vorlagen und Schritt-für-Schritt-Anleitungen:
-              </p>
+              
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                 <li>Musteranträge für Netzanschluss</li>
-                <li>Beschwerdevorlagen bei Verzögerungen</li>
-                <li>Checklisten für den Anschlussprozess</li>
-                <li>Dokumentationsvorlagen für Evidenzen</li>
+                
+                
+                
               </ul>
               <p className="text-sm text-muted-foreground italic mt-4">
                 [Platzhalter – Templates werden sukzessive ergänzt]
