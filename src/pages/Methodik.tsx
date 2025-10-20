@@ -88,7 +88,7 @@ const Methodik = () => {
             </CardHeader>
             <CardContent>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• Community-Eingaben (Projektierer, Installateure)</li>
+                <li>Bei fehlenden Daten wird &quot;keine Daten&quot; angezeigt (grau).</li>
                 <li>• Öffentliche VNB-Websites (Antragsformulare, Prozessbeschreibungen)</li>
                 <li>• Offizielle Berichte (BNetzA, Landesregulierungsbehörden)</li>
                 <li>• Medienberichte und Recherchen</li>
