@@ -54,9 +54,7 @@ const Erklaerungen = () => {
             <CardContent className="space-y-4">
               <div>
                 <h3 className="font-semibold mb-2">...</h3>
-                <p className="text-sm text-muted-foreground">
-                  [Platzhalter – wird mit rechtlichen Hinweisen und Kontaktstellen gefüllt]
-                </p>
+                <p className="text-sm text-muted-foreground">...</p>
               </div>
               <div>
                 <h3 className="font-semibold mb-2">...</h3>
