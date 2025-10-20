@@ -31,7 +31,7 @@ const Erklaerungen = () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>Leitfäden & Templates</CardTitle>
+              <CardTitle>Links zu Leitfäden und weiteren Informationen für die betrachteten Themen</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
