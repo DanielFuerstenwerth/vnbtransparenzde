@@ -53,13 +53,13 @@ const Erklaerungen = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Wie kann ich gegen einen VNB vorgehen?</h3>
+                <h3 className="font-semibold mb-2">...</h3>
                 <p className="text-sm text-muted-foreground">
                   [Platzhalter – wird mit rechtlichen Hinweisen und Kontaktstellen gefüllt]
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Wer ist für die Regulierung zuständig?</h3>
+                <h3 className="font-semibold mb-2">...</h3>
                 <p className="text-sm text-muted-foreground">
                   [Platzhalter – Bundesnetzagentur und Landesregulierungsbehörden]
                 </p>
