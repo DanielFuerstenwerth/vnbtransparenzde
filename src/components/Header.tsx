@@ -17,12 +17,6 @@ const Header = () => {
             <Link to="/news" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               News
             </Link>
-            <Link to="/methodik" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Methodik
-            </Link>
-            <Link to="/erklaerungen" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Erklärungen
-            </Link>
             <Link to="/mitmachen" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Mitmachen
             </Link>
