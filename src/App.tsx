@@ -16,6 +16,12 @@ import Api from "./pages/Api";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import NotFound from "./pages/NotFound";
+import DezentraleEw from "./pages/DezentraleEw";
+import Ggv from "./pages/dezentrale-ew/Ggv";
+import Mieterstrom from "./pages/dezentrale-ew/Mieterstrom";
+import A14 from "./pages/dezentrale-ew/A14";
+import Direktvermarktung from "./pages/dezentrale-ew/Direktvermarktung";
+import ComingSoon from "./pages/dezentrale-ew/ComingSoon";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +44,12 @@ const App = () => (
           <Route path="/api" element={<Api />} />
           <Route path="/legal/impressum" element={<Impressum />} />
           <Route path="/legal/datenschutz" element={<Datenschutz />} />
+          <Route path="/dezentrale-ew" element={<DezentraleEw />} />
+          <Route path="/dezentrale-ew/ggv" element={<Ggv />} />
+          <Route path="/dezentrale-ew/mieterstrom" element={<Mieterstrom />} />
+          <Route path="/dezentrale-ew/14a" element={<A14 />} />
+          <Route path="/dezentrale-ew/direktvermarktung" element={<Direktvermarktung />} />
+          <Route path="/dezentrale-ew/coming-soon" element={<ComingSoon />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

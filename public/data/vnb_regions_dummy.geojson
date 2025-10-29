@@ -1,0 +1,141 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "vnb_id": "010001",
+        "vnb_name": "Stadtwerke Nord"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [10.0, 53.5],
+          [10.5, 53.5],
+          [10.5, 54.0],
+          [10.0, 54.0],
+          [10.0, 53.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vnb_id": "010002",
+        "vnb_name": "Energienetz Ost"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [10.5, 53.5],
+          [11.0, 53.5],
+          [11.0, 54.0],
+          [10.5, 54.0],
+          [10.5, 53.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vnb_id": "010003",
+        "vnb_name": "Süd-Netz GmbH"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [10.0, 53.0],
+          [10.5, 53.0],
+          [10.5, 53.5],
+          [10.0, 53.5],
+          [10.0, 53.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vnb_id": "010004",
+        "vnb_name": "West Verteilnetz"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [9.5, 53.0],
+          [10.0, 53.0],
+          [10.0, 53.5],
+          [9.5, 53.5],
+          [9.5, 53.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vnb_id": "010005",
+        "vnb_name": "Energie Mitte"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [10.5, 53.0],
+          [11.0, 53.0],
+          [11.0, 53.5],
+          [10.5, 53.5],
+          [10.5, 53.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vnb_id": "010006",
+        "vnb_name": "Netz Regional"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [11.0, 53.5],
+          [11.5, 53.5],
+          [11.5, 54.0],
+          [11.0, 54.0],
+          [11.0, 53.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vnb_id": "010007",
+        "vnb_name": "Küsten Energie"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [9.5, 53.5],
+          [10.0, 53.5],
+          [10.0, 54.0],
+          [9.5, 54.0],
+          [9.5, 53.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vnb_id": "010008",
+        "vnb_name": "Landnetz Plus"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [11.0, 53.0],
+          [11.5, 53.0],
+          [11.5, 53.5],
+          [11.0, 53.5],
+          [11.0, 53.0]
+        ]]
+      }
+    }
+  ]
+}

@@ -66,6 +66,14 @@ All colors MUST be HSL.
     /* Friendly rounded corners */
     --radius: 0.75rem;
     
+    /* Score color tokens for visualization */
+    --neg-50: 8 47% 31%; /* dunkelrot #7F1D1D */
+    --neg-25: 0 72% 51%; /* rot #DC2626 */
+    --neutral: 215 16% 65%; /* grau #9CA3AF */
+    --pos-25: 142 71% 37%; /* grün #16A34A */
+    --pos-50: 160 84% 19%; /* dunkelgrün #065F46 */
+    --unknown: 220 13% 91%; /* hellgrau #E5E7EB */
+    
     /* Sidebar */
     --sidebar-background: 36 15% 97%;
     --sidebar-foreground: 24 10% 22%;
