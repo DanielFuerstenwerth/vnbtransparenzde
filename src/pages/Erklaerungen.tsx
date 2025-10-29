@@ -23,7 +23,9 @@ const Erklaerungen = () => {
                 <li>Fristen für Angebotserstellung</li>
                 <li>Beschwerdewege bei Verzögerungen</li>
               </ul>
-              
+              <p className="text-sm text-muted-foreground italic mt-4">
+                [Platzhalter – wird in Kürze mit detaillierten Leitfäden gefüllt]
+              </p>
             </CardContent>
           </Card>
 
@@ -34,12 +36,14 @@ const Erklaerungen = () => {
             <CardContent>
               
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                
+                <li>Musteranträge für Netzanschluss</li>
                 
                 
                 
               </ul>
-              
+              <p className="text-sm text-muted-foreground italic mt-4">
+                [Platzhalter – Templates werden sukzessive ergänzt]
+              </p>
             </CardContent>
           </Card>
 
