@@ -27,9 +27,12 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
     ]).then(([geoData, scoresMap]) => {
       if (!map.current) return;
 
-      L.geoJSON(geoData as any, {
-        style: (feature) => {
-          const vnbId = feature?.properties?.id || feature?.properties?.vnb_id;
+      const geoLayer = L.geoJSON(geoData as any, {
+        style: (feature: any) => {
+          const vnbId =
+            feature?.properties?.vnb_id ??
+            feature?.properties?.id ??
+            feature?.id;
           const scoreData = vnbId ? scoresMap.get(vnbId) : null;
           const color = getColor(scoreData?.score);
 
@@ -41,8 +44,8 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
             fillOpacity: 0.7
           };
         },
-        onEachFeature: (feature, layer) => {
-          const vnbId = feature.properties.id || feature.properties.vnb_id;
+        onEachFeature: (feature: any, layer) => {
+          const vnbId = feature?.properties?.vnb_id ?? feature?.properties?.id ?? feature?.id;
           const scoreData = scoresMap.get(vnbId);
           const vnbName = scoreData?.vnb_name || vnbId;
 
@@ -70,21 +73,24 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
           });
 
           // Hover effect
-          layer.on('mouseover', function() {
+          layer.on('mouseover', function(this: any) {
             this.setStyle({
               weight: 3,
               fillOpacity: 0.9
             });
           });
 
-          layer.on('mouseout', function() {
+          layer.on('mouseout', function(this: any) {
             this.setStyle({
-              weight: 2,
+              weight: 1,
               fillOpacity: 0.7
             });
           });
         }
       }).addTo(map.current);
+
+      // Fit map to polygon bounds
+      map.current.fitBounds(geoLayer.getBounds(), { padding: [20, 20] });
     }).catch(error => {
       console.error('Error loading map data:', error);
     });

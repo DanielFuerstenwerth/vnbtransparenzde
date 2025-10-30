@@ -35,10 +35,29 @@ export async function loadRegions(url: string): Promise<GeoJSONData> {
 }
 
 export async function loadScores(url: string): Promise<Map<string, ScoreData>> {
-  const response = await fetch(url);
-  const text = await response.text();
+  async function fetchText(u: string): Promise<string> {
+    try {
+      const res = await fetch(u);
+      return await res.text();
+    } catch {
+      return '';
+    }
+  }
+
+  let text = await fetchText(url);
+
+  const looksInvalid =
+    !text ||
+    text.includes('Sorry, the file you have requested does not exist') ||
+    !text.includes('\n') ||
+    text.toLowerCase().includes('<!doctype');
+
+  if (looksInvalid) {
+    // Fallback to local CSV if remote is unavailable
+    text = await fetchText('/data/scores_ggv.csv');
+  }
   
-  const lines = text.trim().split('\n');
+  const lines = text.trim().split(/\r?\n/);
   const scoreMap = new Map<string, ScoreData>();
   
   // Skip header
@@ -46,14 +65,16 @@ export async function loadScores(url: string): Promise<Map<string, ScoreData>> {
     const line = lines[i].trim();
     if (!line) continue;
     
-    const parts = line.split(',');
+    // Basic CSV split and strip optional quotes
+    const parts = line.split(',').map(p => p.replace(/^"(.*)"$/, '$1').trim());
     if (parts.length >= 3) {
       const vnb_id = parts[0].trim();
       const vnb_name = parts[1].trim();
       const scoreStr = parts[2].trim();
       const updated_at = parts.length > 3 ? parts[3].trim() : '';
       
-      const score = scoreStr && scoreStr !== '' ? parseFloat(scoreStr.replace('+', '')) : null;
+      const parsed = scoreStr ? parseFloat(scoreStr.replace('+', '').replace(',', '.')) : NaN;
+      const score = Number.isFinite(parsed) ? parsed : null;
       scoreMap.set(vnb_id, { vnb_id, vnb_name, score, updated_at });
     }
   }
