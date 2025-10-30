@@ -5,12 +5,9 @@ import CategoryTabs from "@/components/CategoryTabs";
 import SubcategoryTabs from "@/components/SubcategoryTabs";
 import ComingSoonCard from "@/components/ComingSoonCard";
 import { Card, CardContent } from "@/components/ui/card";
-
 const Direktvermarktung = () => {
   const [activeCategory, setActiveCategory] = useState("dezentrale-ew");
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Header />
       <CategoryTabs activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
       <SubcategoryTabs activeSubcategory="direktvermarktung" />
@@ -21,13 +18,11 @@ const Direktvermarktung = () => {
           
           <div className="grid lg:grid-cols-12 gap-6">
             <div className="lg:col-span-7">
-              <div 
-                className="w-full rounded-lg border border-border bg-muted/30 flex items-center justify-center"
-                style={{ height: '70vh', minHeight: '500px' }}
-                role="img"
-                aria-label="Platzhalter für zukünftige Karte"
-              >
-                <p className="text-muted-foreground">Karte folgt in Kürze</p>
+              <div className="w-full rounded-lg border border-border bg-muted/30 flex items-center justify-center" style={{
+              height: '70vh',
+              minHeight: '500px'
+            }} role="img" aria-label="Platzhalter für zukünftige Karte">
+                <p className="text-muted-foreground">folgt</p>
               </div>
             </div>
 
@@ -51,8 +46,6 @@ const Direktvermarktung = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Direktvermarktung;
