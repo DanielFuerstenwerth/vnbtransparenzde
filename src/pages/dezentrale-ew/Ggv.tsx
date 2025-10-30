@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CategoryTabs from "@/components/CategoryTabs";
 import SubcategoryTabs from "@/components/SubcategoryTabs";
-import MapGgv from "@/components/MapGgv";
+import MapGgv, { MapGgvHandle } from "@/components/MapGgv";
 import MapLegend from "@/components/MapLegend";
 import BenchmarkPanel from "@/components/BenchmarkPanel";
 import Banner from "@/components/Banner";
@@ -11,9 +11,17 @@ import Banner from "@/components/Banner";
 const Ggv = () => {
   const [activeCategory, setActiveCategory] = useState("dezentrale-ew");
   const [selectedVnbId, setSelectedVnbId] = useState<string | null>(null);
+  const mapRef = useRef<MapGgvHandle>(null);
 
   const handleRegionClick = (vnbId: string, vnbName: string) => {
     setSelectedVnbId(vnbId);
+  };
+
+  const handleVnbSelect = (vnbId: string | null) => {
+    setSelectedVnbId(vnbId);
+    if (vnbId && mapRef.current) {
+      mapRef.current.zoomToVnb(vnbId);
+    }
   };
 
   return (
@@ -30,7 +38,7 @@ const Ggv = () => {
           <div className="grid lg:grid-cols-12 gap-6">
             {/* Left column - Map */}
             <div className="lg:col-span-7 space-y-4">
-              <MapGgv onRegionClick={handleRegionClick} />
+              <MapGgv ref={mapRef} onRegionClick={handleRegionClick} />
               <MapLegend />
             </div>
 
@@ -38,7 +46,7 @@ const Ggv = () => {
             <div className="lg:col-span-5">
               <BenchmarkPanel 
                 selectedVnbId={selectedVnbId}
-                onVnbSelect={setSelectedVnbId}
+                onVnbSelect={handleVnbSelect}
               />
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { loadScoresFromGoogleSheets } from '@/utils/googleSheetsLoader';
@@ -7,9 +7,30 @@ interface MapGgvProps {
   onRegionClick: (vnbId: string, vnbName: string) => void;
 }
 
-const MapGgv = ({ onRegionClick }: MapGgvProps) => {
+export interface MapGgvHandle {
+  zoomToVnb: (vnbId: string) => void;
+}
+
+const MapGgv = forwardRef<MapGgvHandle, MapGgvProps>(({ onRegionClick }, ref) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
+  const geoLayer = useRef<L.GeoJSON | null>(null);
+
+  useImperativeHandle(ref, () => ({
+    zoomToVnb: (vnbId: string) => {
+      if (!map.current || !geoLayer.current) return;
+      
+      geoLayer.current.eachLayer((layer: any) => {
+        if (layer.feature?.id === vnbId) {
+          const bounds = layer.getBounds();
+          map.current?.fitBounds(bounds, { 
+            padding: [50, 50],
+            maxZoom: 10
+          });
+        }
+      });
+    }
+  }));
 
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
@@ -20,6 +41,12 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
       attributionControl: false
     }).setView([51.1657, 10.4515], 6);
 
+    // Add OSM tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 19
+    }).addTo(map.current);
+
     // Load real GeoJSON and scores from Google Sheets
     Promise.all([
       fetch('/data/vnb_regions.geojson').then(r => r.json()),
@@ -27,7 +54,7 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
     ]).then(([geoData, scoresMap]) => {
       if (!map.current) return;
 
-      const geoLayer = L.geoJSON(geoData, {
+      geoLayer.current = L.geoJSON(geoData, {
         style: (feature: any) => {
           const vnbId = feature?.id;
           const scoreData = vnbId ? scoresMap.get(vnbId) : null;
@@ -70,7 +97,7 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
         }
       }).addTo(map.current);
 
-      map.current.fitBounds(geoLayer.getBounds());
+      map.current.fitBounds(geoLayer.current.getBounds());
     });
 
     return () => {
@@ -90,6 +117,8 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
       aria-label="Karte der Verteilnetzbetreiber"
     />
   );
-};
+});
+
+MapGgv.displayName = 'MapGgv';
 
 export default MapGgv;
