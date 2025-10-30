@@ -5,12 +5,9 @@ import CategoryTabs from "@/components/CategoryTabs";
 import SubcategoryTabs from "@/components/SubcategoryTabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ComingSoonCard from "@/components/ComingSoonCard";
-
 const ComingSoon = () => {
   const [activeCategory, setActiveCategory] = useState("dezentrale-ew");
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Header />
       <CategoryTabs activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
       <SubcategoryTabs activeSubcategory="coming-soon" />
@@ -24,21 +21,21 @@ const ComingSoon = () => {
             
             <Card>
               <CardHeader>
-                <CardTitle>Geplante Unterkategorien</CardTitle>
+                <CardTitle>Mögliche weitere Unterkategorien</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <span className="text-muted-foreground">•</span>
                     <div>
-                      <h4 className="font-medium">Einspeisemanagement</h4>
+                      <h4 className="font-medium">Webportale Netzanschluss</h4>
                       <p className="text-sm text-muted-foreground">Analyse der Transparenz und Prozesse beim Einspeisemanagement</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="text-muted-foreground">•</span>
                     <div>
-                      <h4 className="font-medium">Netzampel & Transparenz</h4>
+                      <h4 className="font-medium">Speicherintegration </h4>
                       <p className="text-sm text-muted-foreground">Bewertung der Netzzustandsinformationen und deren Zugänglichkeit</p>
                     </div>
                   </li>
@@ -71,8 +68,6 @@ const ComingSoon = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default ComingSoon;
