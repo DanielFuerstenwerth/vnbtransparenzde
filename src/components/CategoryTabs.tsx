@@ -63,7 +63,7 @@ const CategoryTabs = ({ activeCategory, onCategoryChange }: CategoryTabsProps) =
             className="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground opacity-50 cursor-not-allowed"
             disabled
           >
-            Digitalisierung
+            Flexible Netzanschlüsse
           </button>
           
           <button
