@@ -51,7 +51,8 @@ export function VnbCombobox({ vnbList, selectedVnbId, onVnbSelect, disabled }: V
               {filteredVnbs.slice(0, 10).map((vnb) => (
                 <button
                   key={vnb.id}
-                  onClick={() => {
+                  onMouseDown={(e) => {
+                    e.preventDefault(); // ensure selection before input blur
                     onVnbSelect(vnb.id);
                     setSearchTerm("");
                     setShowDropdown(false);
