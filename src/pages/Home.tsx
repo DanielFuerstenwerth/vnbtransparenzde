@@ -40,7 +40,7 @@ const Home = () => {
               variant="secondary" 
               onClick={() => window.location.href = '/dezentrale-ew/ggv'}
             >
-              Zur Analyse
+              Zur Karte
             </Button>
           </div>
         </section>
