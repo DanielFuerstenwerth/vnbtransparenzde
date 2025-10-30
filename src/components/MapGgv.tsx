@@ -15,22 +15,38 @@ const MapGgv = forwardRef<MapGgvHandle, MapGgvProps>(({ onRegionClick }, ref) =>
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const geoLayer = useRef<L.GeoJSON | null>(null);
+  const pendingZoomId = useRef<string | null>(null);
 
   useImperativeHandle(ref, () => ({
     zoomToVnb: (vnbId: string) => {
-      if (!map.current || !geoLayer.current) return;
+      if (!map.current) return;
       
+      if (!geoLayer.current) {
+        pendingZoomId.current = vnbId;
+        return;
+      }
+
+      let found = false;
       geoLayer.current.eachLayer((layer: any) => {
         if (layer.feature?.id === vnbId) {
           const bounds = layer.getBounds();
           map.current?.fitBounds(bounds, { 
             padding: [20, 20],
-            maxZoom: 12,
             animate: true,
-            duration: 0.8
+            maxZoom: 19
           });
+
+          const center = bounds.getCenter();
+          const currentZoom = map.current?.getZoom() ?? 8;
+          const targetZoom = Math.min(currentZoom + 2, 13);
+          map.current?.flyTo(center, targetZoom, { animate: true, duration: 0.6 });
+          found = true;
         }
       });
+
+      if (!found) {
+        console.warn('VNB not found on map for id:', vnbId);
+      }
     }
   }));
 
@@ -47,7 +63,7 @@ const MapGgv = forwardRef<MapGgvHandle, MapGgvProps>(({ onRegionClick }, ref) =>
     const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
       maxZoom: 19,
-      opacity: 0.3
+      opacity: 1
     }).addTo(map.current);
 
     // Load real GeoJSON and scores from Google Sheets
@@ -77,7 +93,7 @@ const MapGgv = forwardRef<MapGgvHandle, MapGgvProps>(({ onRegionClick }, ref) =>
             weight: 1,
             opacity: 1,
             color: '#333333',
-            fillOpacity: 0.7
+            fillOpacity: 0.35
           };
         },
         onEachFeature: (feature: any, layer) => {
@@ -92,15 +108,35 @@ const MapGgv = forwardRef<MapGgvHandle, MapGgvProps>(({ onRegionClick }, ref) =>
 
           layer.on('click', () => onRegionClick(vnbId, vnbName));
           layer.on('mouseover', function(this: any) {
-            this.setStyle({ weight: 2, fillOpacity: 0.9 });
+            this.setStyle({ weight: 2, fillOpacity: 0.55 });
           });
           layer.on('mouseout', function(this: any) {
-            this.setStyle({ weight: 1, fillOpacity: 0.7 });
+            this.setStyle({ weight: 1, fillOpacity: 0.35 });
           });
         }
       }).addTo(map.current);
 
       map.current.fitBounds(geoLayer.current.getBounds());
+
+      if (pendingZoomId.current) {
+        const targetId = pendingZoomId.current;
+        let found = false;
+        geoLayer.current.eachLayer((layer: any) => {
+          if (layer.feature?.id === targetId) {
+            const bounds = layer.getBounds();
+            map.current?.fitBounds(bounds, { padding: [20, 20], animate: true, maxZoom: 19 });
+            const center = bounds.getCenter();
+            const current = map.current?.getZoom() ?? 8;
+            const targetZoom = Math.min(current + 2, 13);
+            map.current?.flyTo(center, targetZoom, { animate: true, duration: 0.6 });
+            found = true;
+          }
+        });
+        if (!found) {
+          console.warn('Pending VNB not found on map for id:', targetId);
+        }
+        pendingZoomId.current = null;
+      }
     });
 
     return () => {
