@@ -38,13 +38,14 @@ const MapGgv = forwardRef<MapGgvHandle, MapGgvProps>(({ onRegionClick }, ref) =>
     // Initialize map
     map.current = L.map(mapContainer.current, {
       zoomControl: true,
-      attributionControl: false
+      attributionControl: true
     }).setView([51.1657, 10.4515], 6);
 
     // Add OSM tile layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
-      maxZoom: 19
+      maxZoom: 19,
+      opacity: 0.5
     }).addTo(map.current);
 
     // Load real GeoJSON and scores from Google Sheets
