@@ -35,31 +35,25 @@ const ComingSoon = () => {
                   <li className="flex items-start gap-3">
                     <span className="text-muted-foreground">•</span>
                     <div>
-                      <h4 className="font-medium">Speicherintegration </h4>
-                      <p className="text-sm text-muted-foreground">Bewertung der Netzzustandsinformationen und deren Zugänglichkeit</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-muted-foreground">•</span>
-                    <div>
                       <h4 className="font-medium">Speicherintegration</h4>
-                      <p className="text-sm text-muted-foreground">Unterstützung bei der Integration von Batteriespeichern</p>
+                      <p className="text-sm text-muted-foreground">Analyse der Unterstützung der flexiblen Nutzung von Speichern für die Optimierung des Stromeinkaufs</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="text-muted-foreground">•</span>
                     <div>
-                      <h4 className="font-medium">PV-Anlagen Anschluss</h4>
-                      <p className="text-sm text-muted-foreground">Bewertung der Anschlussprozesse für Photovoltaikanlagen</p>
+                      <h4 className="font-medium">Energy Sharing</h4>
+                      <p className="text-sm text-muted-foreground">Analyse der Umsetzung des EnergySharings</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="text-muted-foreground">•</span>
                     <div>
-                      <h4 className="font-medium">Redispatch 2.0</h4>
-                      <p className="text-sm text-muted-foreground">Analyse der Umsetzung von Redispatch 2.0</p>
+                      <h4 className="font-medium">...</h4>
+                      <p className="text-sm text-muted-foreground">...</p>
                     </div>
                   </li>
+                  
                 </ul>
               </CardContent>
             </Card>
