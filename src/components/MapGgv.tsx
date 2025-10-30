@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import L, { GeoJSON as LeafletGeoJSON } from 'leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { loadRegions, loadScores, getColor } from '@/utils/dataLoader';
+import { loadScores } from '@/utils/dataLoader';
 
 interface MapGgvProps {
   onRegionClick: (vnbId: string, vnbName: string) => void;
@@ -14,85 +14,63 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
-    // Initialize map centered on Germany
+    // Initialize map
     map.current = L.map(mapContainer.current, {
       zoomControl: true,
       attributionControl: false
     }).setView([51.1657, 10.4515], 6);
 
-    // Load data and render
+    // Load dummy GeoJSON and scores
     Promise.all([
-      loadRegions('/data/vnb_regions.json'),
-      loadScores('https://docs.google.com/spreadsheets/d/e/2PACX-1vQVyiiMn8SoMONrP-xGkt82DJcgjdL_gQ0nANylg3_0IqIe0l9fDM6DuXO5RNlACQl_Z9sg5ZQOWuM_/pub?gid=958902975&single=true&output=csv')
+      fetch('/data/vnb_regions_dummy.geojson').then(r => r.json()),
+      loadScores('/data/scores_ggv_extended.csv')
     ]).then(([geoData, scoresMap]) => {
       if (!map.current) return;
 
-      const geoLayer = L.geoJSON(geoData as any, {
+      const geoLayer = L.geoJSON(geoData, {
         style: (feature: any) => {
-          const vnbId =
-            feature?.properties?.vnb_id ??
-            feature?.properties?.id ??
-            feature?.id;
+          const vnbId = feature?.properties?.vnb_id ?? feature?.id;
           const scoreData = vnbId ? scoresMap.get(vnbId) : null;
-          const color = getColor(scoreData?.score);
+          const score = scoreData?.score;
+          
+          let fillColor = '#E5E7EB';
+          if (score !== null && score !== undefined) {
+            if (score <= -50) fillColor = '#7F1D1D';
+            else if (score <= -25) fillColor = '#DC2626';
+            else if (score < 25) fillColor = '#9CA3AF';
+            else if (score < 50) fillColor = '#16A34A';
+            else fillColor = '#065F46';
+          }
 
           return {
-            fillColor: color,
-            weight: 1,
+            fillColor,
+            weight: 2,
             opacity: 1,
-            color: 'hsl(var(--border))',
+            color: '#333333',
             fillOpacity: 0.7
           };
         },
         onEachFeature: (feature: any, layer) => {
-          const vnbId = feature?.properties?.vnb_id ?? feature?.properties?.id ?? feature?.id;
+          const vnbId = feature?.properties?.vnb_id ?? feature?.id;
           const scoreData = scoresMap.get(vnbId);
           const vnbName = scoreData?.vnb_name || vnbId;
 
-          // Tooltip
-          let tooltipText = '';
-          if (scoreData && scoreData.score !== null) {
-            tooltipText = `${vnbName}: ${scoreData.score > 0 ? '+' : ''}${scoreData.score}`;
-            if (scoreData.updated_at) {
-              tooltipText += ` (Stand ${scoreData.updated_at})`;
-            }
-          } else if (scoreData) {
-            tooltipText = `${vnbName}: Keine Daten`;
-          } else {
-            tooltipText = `VNB ${vnbId}: Keine Daten`;
-          }
+          layer.bindTooltip(
+            scoreData ? `${vnbName}: ${scoreData.score !== null ? (scoreData.score > 0 ? '+' : '') + scoreData.score : 'N/A'}` : `VNB ${vnbId}`,
+            { sticky: true, className: 'custom-tooltip' }
+          );
 
-          layer.bindTooltip(tooltipText, {
-            sticky: true,
-            className: 'custom-tooltip'
-          });
-
-          // Click handler
-          layer.on('click', () => {
-            onRegionClick(vnbId, vnbName);
-          });
-
-          // Hover effect
+          layer.on('click', () => onRegionClick(vnbId, vnbName));
           layer.on('mouseover', function(this: any) {
-            this.setStyle({
-              weight: 3,
-              fillOpacity: 0.9
-            });
+            this.setStyle({ weight: 3, fillOpacity: 0.9 });
           });
-
           layer.on('mouseout', function(this: any) {
-            this.setStyle({
-              weight: 1,
-              fillOpacity: 0.7
-            });
+            this.setStyle({ weight: 2, fillOpacity: 0.7 });
           });
         }
       }).addTo(map.current);
 
-      // Fit map to polygon bounds
-      map.current.fitBounds(geoLayer.getBounds(), { padding: [20, 20] });
-    }).catch(error => {
-      console.error('Error loading map data:', error);
+      map.current.fitBounds(geoLayer.getBounds());
     });
 
     return () => {
@@ -109,7 +87,7 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
       className="w-full rounded-lg border border-border shadow-sm"
       style={{ height: '70vh', minHeight: '500px' }}
       role="img"
-      aria-label="Karte der Verteilnetzbetreiber mit GGV-Bewertungen"
+      aria-label="Karte der Verteilnetzbetreiber"
     />
   );
 };

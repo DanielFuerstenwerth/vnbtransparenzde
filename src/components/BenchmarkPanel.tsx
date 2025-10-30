@@ -15,7 +15,7 @@ const BenchmarkPanel = ({ selectedVnbId, onVnbSelect }: BenchmarkPanelProps) => 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadScores('https://docs.google.com/spreadsheets/d/e/2PACX-1vQVyiiMn8SoMONrP-xGkt82DJcgjdL_gQ0nANylg3_0IqIe0l9fDM6DuXO5RNlACQl_Z9sg5ZQOWuM_/pub?gid=958902975&single=true&output=csv')
+    loadScores('/data/scores_ggv_extended.csv')
       .then((scoresMap) => {
         const list = Array.from(scoresMap.values()).map(scoreData => ({
           id: scoreData.vnb_id,
@@ -88,48 +88,53 @@ const BenchmarkPanel = ({ selectedVnbId, onVnbSelect }: BenchmarkPanelProps) => 
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-semibold mb-3">Ranking Visualisierung</h4>
-                  <div className="relative h-20 bg-muted/30 rounded-lg p-2">
-                    {/* Scale markers */}
-                    <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-muted-foreground px-2 pb-1">
-                      <span>-50</span>
-                      <span>0</span>
-                      <span>+50</span>
+                  <h4 className="text-sm font-semibold mb-3">Ranking aller VNB</h4>
+                  <div className="relative bg-muted/20 rounded-lg overflow-hidden p-4">
+                    {/* 850 vertical bars visualization */}
+                    <div className="flex items-end justify-start h-32 gap-[1px]">
+                      {vnbList.map((vnb) => {
+                        const isSelected = vnb.id === selectedVnbId;
+                        const score = vnb.score ?? 0;
+                        
+                        // Hardcoded colors matching map
+                        let fillColor = '#E5E7EB'; // No data
+                        if (vnb.score !== null) {
+                          if (score <= -50) fillColor = '#7F1D1D';
+                          else if (score <= -25) fillColor = '#DC2626';
+                          else if (score < 25) fillColor = '#9CA3AF';
+                          else if (score < 50) fillColor = '#16A34A';
+                          else fillColor = '#065F46';
+                        }
+                        
+                        return (
+                          <div
+                            key={vnb.id}
+                            className="flex-1 min-w-[1px] transition-all cursor-pointer"
+                            style={{
+                              height: isSelected ? '100%' : '75%',
+                              backgroundColor: isSelected ? fillColor : '#D1D5DB',
+                              opacity: isSelected ? 1 : 0.7
+                            }}
+                            title={`${vnb.name}: ${vnb.score !== null ? (vnb.score > 0 ? '+' : '') + vnb.score : 'N/A'}`}
+                            onClick={() => onVnbSelect(vnb.id)}
+                          />
+                        );
+                      })}
                     </div>
                     
-                    {/* All VNBs as small dots */}
-                    {vnbList.map((vnb) => {
-                      const score = vnb.score ?? 0;
-                      const position = ((score + 50) / 100) * 100; // Map -50 to +50 => 0% to 100%
-                      const isSelected = vnb.id === selectedVnbId;
-                      
-                      return (
-                        <div
-                          key={vnb.id}
-                          className="absolute top-6 transform -translate-x-1/2 transition-all"
-                          style={{
-                            left: `${Math.max(2, Math.min(98, position))}%`,
-                          }}
-                        >
-                          <div
-                            className={`rounded-full transition-all ${
-                              isSelected ? 'w-4 h-4 ring-2 ring-primary' : 'w-2 h-2'
-                            }`}
-                            style={{
-                              backgroundColor: getColor(vnb.score),
-                              opacity: isSelected ? 1 : 0.6
-                            }}
-                          />
-                        </div>
-                      );
-                    })}
+                    {/* Legend below */}
+                    <div className="flex justify-between text-xs text-muted-foreground mt-3 px-1">
+                      <span>Beste</span>
+                      <span>Position {position} von {vnbList.length}</span>
+                      <span>Schlechteste</span>
+                    </div>
                   </div>
                   
                   {selectedVnb && (
-                    <div className="mt-2 text-center text-sm">
+                    <div className="mt-3 text-center text-sm bg-muted/30 p-3 rounded-lg">
                       <span className="font-medium">{selectedVnb.name}</span>
                       <span className="text-muted-foreground"> - Score: </span>
-                      <span className="font-semibold">
+                      <span className="font-semibold" style={{ color: getColor(selectedVnb.score) }}>
                         {selectedVnb.score !== null ? (selectedVnb.score > 0 ? '+' : '') + selectedVnb.score : 'N/A'}
                       </span>
                     </div>

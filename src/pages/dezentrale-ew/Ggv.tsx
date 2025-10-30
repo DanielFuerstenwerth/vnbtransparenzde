@@ -6,6 +6,7 @@ import SubcategoryTabs from "@/components/SubcategoryTabs";
 import MapGgv from "@/components/MapGgv";
 import MapLegend from "@/components/MapLegend";
 import BenchmarkPanel from "@/components/BenchmarkPanel";
+import Banner from "@/components/Banner";
 
 const Ggv = () => {
   const [activeCategory, setActiveCategory] = useState("dezentrale-ew");
@@ -17,6 +18,7 @@ const Ggv = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Banner />
       <Header />
       <CategoryTabs activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
       <SubcategoryTabs activeSubcategory="ggv" />
