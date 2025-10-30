@@ -24,8 +24,10 @@ const MapGgv = forwardRef<MapGgvHandle, MapGgvProps>(({ onRegionClick }, ref) =>
         if (layer.feature?.id === vnbId) {
           const bounds = layer.getBounds();
           map.current?.fitBounds(bounds, { 
-            padding: [50, 50],
-            maxZoom: 10
+            padding: [20, 20],
+            maxZoom: 12,
+            animate: true,
+            duration: 0.8
           });
         }
       });
@@ -45,7 +47,7 @@ const MapGgv = forwardRef<MapGgvHandle, MapGgvProps>(({ onRegionClick }, ref) =>
     const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
       maxZoom: 19,
-      opacity: 0.5
+      opacity: 0.3
     }).addTo(map.current);
 
     // Load real GeoJSON and scores from Google Sheets
