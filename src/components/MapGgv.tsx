@@ -23,13 +23,13 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
     // Load real GeoJSON and scores
     Promise.all([
       fetch('/data/vnb_regions.geojson').then(r => r.json()),
-      loadScores('/data/scores_ggv_extended.csv')
+      loadScores('/data/scores_ggv.csv')
     ]).then(([geoData, scoresMap]) => {
       if (!map.current) return;
 
       const geoLayer = L.geoJSON(geoData, {
         style: (feature: any) => {
-          const vnbId = feature?.properties?.vnb_id ?? feature?.id;
+          const vnbId = feature?.id;
           const scoreData = vnbId ? scoresMap.get(vnbId) : null;
           const score = scoreData?.score;
           
@@ -51,7 +51,7 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
           };
         },
         onEachFeature: (feature: any, layer) => {
-          const vnbId = feature?.properties?.vnb_id ?? feature?.id;
+          const vnbId = feature?.id;
           const scoreData = scoresMap.get(vnbId);
           const vnbName = scoreData?.vnb_name || vnbId;
 
