@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CategoryTabs from "@/components/CategoryTabs";
@@ -13,9 +13,9 @@ const Ggv = () => {
   const [selectedVnbId, setSelectedVnbId] = useState<string | null>(null);
   const mapRef = useRef<MapGgvHandle>(null);
 
-  const handleRegionClick = (vnbId: string, vnbName: string) => {
+  const handleRegionClick = useCallback((vnbId: string, vnbName: string) => {
     setSelectedVnbId(vnbId);
-  };
+  }, []);
 
   const handleVnbSelect = (vnbId: string | null) => {
     setSelectedVnbId(vnbId);
