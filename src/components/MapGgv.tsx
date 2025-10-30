@@ -31,15 +31,10 @@ const MapGgv = forwardRef<MapGgvHandle, MapGgvProps>(({ onRegionClick }, ref) =>
         if (layer.feature?.id === vnbId) {
           const bounds = layer.getBounds();
           map.current?.fitBounds(bounds, { 
-            padding: [20, 20],
-            animate: true,
-            maxZoom: 19
+            padding: [24, 24],
+            maxZoom: 13,
+            animate: true
           });
-
-          const center = bounds.getCenter();
-          const currentZoom = map.current?.getZoom() ?? 8;
-          const targetZoom = Math.min(currentZoom + 2, 13);
-          map.current?.flyTo(center, targetZoom, { animate: true, duration: 0.6 });
           found = true;
         }
       });
