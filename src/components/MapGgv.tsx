@@ -15,13 +15,10 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
     if (!mapContainer.current || map.current) return;
 
     // Initialize map centered on Germany
-    map.current = L.map(mapContainer.current).setView([51.1657, 10.4515], 6);
-
-    // Add tile layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
-      maxZoom: 19,
-    }).addTo(map.current);
+    map.current = L.map(mapContainer.current, {
+      zoomControl: true,
+      attributionControl: false
+    }).setView([51.1657, 10.4515], 6);
 
     // Load data and render
     Promise.all([
