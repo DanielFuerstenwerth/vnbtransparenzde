@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { loadRegions, loadScores, getColor, ScoreData } from "@/utils/dataLoader";
+import { loadScores, getColor, ScoreData } from "@/utils/dataLoader";
 import { CheckCircle2 } from "lucide-react";
+import { VnbCombobox } from "./VnbCombobox";
 
 interface BenchmarkPanelProps {
   selectedVnbId: string | null;
@@ -15,34 +15,42 @@ const BenchmarkPanel = ({ selectedVnbId, onVnbSelect }: BenchmarkPanelProps) => 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      loadRegions('/data/vnb_regions_dummy.geojson'),
-      loadScores('/data/scores_ggv.csv')
-    ]).then(([geoData, scoresMap]) => {
-      const list = geoData.features.map(feature => {
-        const vnbId = feature.properties.vnb_id;
-        const scoreData = scoresMap.get(vnbId);
-        return {
-          id: vnbId,
-          name: feature.properties.vnb_name,
-          score: scoreData?.score ?? null
-        };
-      });
+    loadScores('https://docs.google.com/spreadsheets/d/e/2PACX-1vQVyiiMn8SoMONrP-xGkt82DJcgjdL_gQ0nANylg3_0IqIe0l9fDM6DuXO5RNlACQl_Z9sg5ZQOWuM_/pub?gid=958902975&single=true&output=csv')
+      .then((scoresMap) => {
+        const list = Array.from(scoresMap.values()).map(scoreData => ({
+          id: scoreData.vnb_id,
+          name: scoreData.vnb_name,
+          score: scoreData.score
+        }));
 
-      // Sort by score (nulls last)
-      list.sort((a, b) => {
-        if (a.score === null) return 1;
-        if (b.score === null) return -1;
-        return b.score - a.score;
-      });
+        // Sort by score (nulls last)
+        list.sort((a, b) => {
+          if (a.score === null) return 1;
+          if (b.score === null) return -1;
+          return b.score - a.score;
+        });
 
-      setVnbList(list);
-      setLoading(false);
-    });
+        setVnbList(list);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error loading VNB data:', error);
+        setLoading(false);
+      });
   }, []);
 
   const selectedVnb = vnbList.find(v => v.id === selectedVnbId);
-  const position = selectedVnb ? vnbList.findIndex(v => v.id === selectedVnbId) + 1 : null;
+  
+  // Calculate position considering ties
+  const getPosition = (vnb: typeof vnbList[0]) => {
+    if (!vnb || vnb.score === null) return vnbList.length;
+    const sameScoreVnbs = vnbList.filter(v => v.score === vnb.score);
+    const firstIndex = vnbList.findIndex(v => v.score === vnb.score);
+    const lastIndex = firstIndex + sameScoreVnbs.length - 1;
+    return Math.round((firstIndex + lastIndex) / 2) + 1;
+  };
+  
+  const position = selectedVnb ? getPosition(selectedVnb) : null;
 
   return (
     <Card className="h-full">
@@ -62,25 +70,12 @@ const BenchmarkPanel = ({ selectedVnbId, onVnbSelect }: BenchmarkPanelProps) => 
               <label htmlFor="vnb-select" className="text-sm font-medium mb-2 block">
                 VNB auswählen
               </label>
-              <Select
-                value={selectedVnbId || undefined}
-                onValueChange={onVnbSelect}
+              <VnbCombobox
+                vnbList={vnbList}
+                selectedVnbId={selectedVnbId}
+                onVnbSelect={onVnbSelect}
                 disabled={loading}
-              >
-                <SelectTrigger id="vnb-select">
-                  <SelectValue placeholder="VNB auswählen..." />
-                </SelectTrigger>
-                <SelectContent>
-                  {vnbList.map(vnb => (
-                    <SelectItem key={vnb.id} value={vnb.id}>
-                      {vnb.name} {vnb.score !== null ? `(${vnb.score > 0 ? '+' : ''}${vnb.score})` : '(Keine Daten)'}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <p className="text-xs text-muted-foreground mt-1">
-                Hinweis: Suchfunktion folgt in zukünftiger Version
-              </p>
+              />
             </div>
 
             {selectedVnb && (
@@ -93,36 +88,52 @@ const BenchmarkPanel = ({ selectedVnbId, onVnbSelect }: BenchmarkPanelProps) => 
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-semibold mb-3">Ranking</h4>
-                  <div className="space-y-2" role="list" aria-label="VNB Ranking">
-                    {vnbList.map((vnb, index) => {
+                  <h4 className="text-sm font-semibold mb-3">Ranking Visualisierung</h4>
+                  <div className="relative h-20 bg-muted/30 rounded-lg p-2">
+                    {/* Scale markers */}
+                    <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-muted-foreground px-2 pb-1">
+                      <span>-50</span>
+                      <span>0</span>
+                      <span>+50</span>
+                    </div>
+                    
+                    {/* All VNBs as small dots */}
+                    {vnbList.map((vnb) => {
+                      const score = vnb.score ?? 0;
+                      const position = ((score + 50) / 100) * 100; // Map -50 to +50 => 0% to 100%
                       const isSelected = vnb.id === selectedVnbId;
+                      
                       return (
                         <div
                           key={vnb.id}
-                          className={`flex items-center gap-3 p-2 rounded transition-colors ${
-                            isSelected ? 'bg-primary/10 border-2 border-primary' : 'bg-muted/30 border border-transparent'
-                          }`}
-                          role="listitem"
+                          className="absolute top-6 transform -translate-x-1/2 transition-all"
+                          style={{
+                            left: `${Math.max(2, Math.min(98, position))}%`,
+                          }}
                         >
-                          <span className="text-xs text-muted-foreground w-6">{index + 1}.</span>
                           <div
-                            className="h-6 rounded flex-grow"
+                            className={`rounded-full transition-all ${
+                              isSelected ? 'w-4 h-4 ring-2 ring-primary' : 'w-2 h-2'
+                            }`}
                             style={{
-                              width: vnb.score !== null ? `${Math.abs(vnb.score)}%` : '10%',
-                              maxWidth: '100%',
                               backgroundColor: getColor(vnb.score),
-                              opacity: isSelected ? 1 : 0.7
+                              opacity: isSelected ? 1 : 0.6
                             }}
-                            aria-hidden="true"
                           />
-                          <span className="text-sm font-medium min-w-[50px] text-right">
-                            {vnb.score !== null ? (vnb.score > 0 ? '+' : '') + vnb.score : 'N/A'}
-                          </span>
                         </div>
                       );
                     })}
                   </div>
+                  
+                  {selectedVnb && (
+                    <div className="mt-2 text-center text-sm">
+                      <span className="font-medium">{selectedVnb.name}</span>
+                      <span className="text-muted-foreground"> - Score: </span>
+                      <span className="font-semibold">
+                        {selectedVnb.score !== null ? (selectedVnb.score > 0 ? '+' : '') + selectedVnb.score : 'N/A'}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4 mt-6">

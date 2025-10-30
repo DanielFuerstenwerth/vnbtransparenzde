@@ -1,5 +1,8 @@
+import * as topojson from 'topojson-client';
+
 export interface ScoreData {
   vnb_id: string;
+  vnb_name: string;
   score: number | null;
   updated_at: string;
 }
@@ -8,7 +11,7 @@ export interface GeoJSONFeature {
   type: string;
   properties: {
     vnb_id: string;
-    vnb_name: string;
+    vnb_name?: string;
   };
   geometry: any;
 }
@@ -20,7 +23,15 @@ export interface GeoJSONData {
 
 export async function loadRegions(url: string): Promise<GeoJSONData> {
   const response = await fetch(url);
-  return response.json();
+  const data = await response.json();
+  
+  // Convert TopoJSON to GeoJSON
+  if (data.type === 'Topology') {
+    const geojson = topojson.feature(data, data.objects.data) as any;
+    return geojson;
+  }
+  
+  return data;
 }
 
 export async function loadScores(url: string): Promise<Map<string, ScoreData>> {
@@ -32,9 +43,19 @@ export async function loadScores(url: string): Promise<Map<string, ScoreData>> {
   
   // Skip header
   for (let i = 1; i < lines.length; i++) {
-    const [vnb_id, scoreStr, updated_at] = lines[i].split(',');
-    const score = scoreStr && scoreStr.trim() !== '' ? Number(scoreStr) : null;
-    scoreMap.set(vnb_id, { vnb_id, score, updated_at });
+    const line = lines[i].trim();
+    if (!line) continue;
+    
+    const parts = line.split(',');
+    if (parts.length >= 3) {
+      const vnb_id = parts[0].trim();
+      const vnb_name = parts[1].trim();
+      const scoreStr = parts[2].trim();
+      const updated_at = parts.length > 3 ? parts[3].trim() : '';
+      
+      const score = scoreStr && scoreStr !== '' ? parseFloat(scoreStr.replace('+', '')) : null;
+      scoreMap.set(vnb_id, { vnb_id, vnb_name, score, updated_at });
+    }
   }
   
   return scoreMap;
