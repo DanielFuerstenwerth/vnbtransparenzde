@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { loadScores } from '@/utils/dataLoader';
+import { loadScoresFromGoogleSheets } from '@/utils/googleSheetsLoader';
 
 interface MapGgvProps {
   onRegionClick: (vnbId: string, vnbName: string) => void;
@@ -20,10 +20,10 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
       attributionControl: false
     }).setView([51.1657, 10.4515], 6);
 
-    // Load real GeoJSON and scores
+    // Load real GeoJSON and scores from Google Sheets
     Promise.all([
       fetch('/data/vnb_regions.geojson').then(r => r.json()),
-      loadScores('/data/scores_ggv.csv')
+      loadScoresFromGoogleSheets()
     ]).then(([geoData, scoresMap]) => {
       if (!map.current) return;
 
@@ -44,7 +44,7 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
 
           return {
             fillColor,
-            weight: 2,
+            weight: 1,
             opacity: 1,
             color: '#333333',
             fillOpacity: 0.7
@@ -62,10 +62,10 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
 
           layer.on('click', () => onRegionClick(vnbId, vnbName));
           layer.on('mouseover', function(this: any) {
-            this.setStyle({ weight: 3, fillOpacity: 0.9 });
+            this.setStyle({ weight: 2, fillOpacity: 0.9 });
           });
           layer.on('mouseout', function(this: any) {
-            this.setStyle({ weight: 2, fillOpacity: 0.7 });
+            this.setStyle({ weight: 1, fillOpacity: 0.7 });
           });
         }
       }).addTo(map.current);

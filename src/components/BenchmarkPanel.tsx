@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { loadScores, getColor, ScoreData } from "@/utils/dataLoader";
+import { getColor, ScoreData } from "@/utils/dataLoader";
+import { loadScoresFromGoogleSheets } from "@/utils/googleSheetsLoader";
 import { CheckCircle2 } from "lucide-react";
 import { VnbCombobox } from "./VnbCombobox";
 
@@ -15,7 +16,7 @@ const BenchmarkPanel = ({ selectedVnbId, onVnbSelect }: BenchmarkPanelProps) => 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadScores('/data/scores_ggv_extended.csv')
+    loadScoresFromGoogleSheets()
       .then((scoresMap) => {
         const list = Array.from(scoresMap.values()).map(scoreData => ({
           id: scoreData.vnb_id,
@@ -40,17 +41,6 @@ const BenchmarkPanel = ({ selectedVnbId, onVnbSelect }: BenchmarkPanelProps) => 
   }, []);
 
   const selectedVnb = vnbList.find(v => v.id === selectedVnbId);
-  
-  // Calculate position considering ties
-  const getPosition = (vnb: typeof vnbList[0]) => {
-    if (!vnb || vnb.score === null) return vnbList.length;
-    const sameScoreVnbs = vnbList.filter(v => v.score === vnb.score);
-    const firstIndex = vnbList.findIndex(v => v.score === vnb.score);
-    const lastIndex = firstIndex + sameScoreVnbs.length - 1;
-    return Math.round((firstIndex + lastIndex) / 2) + 1;
-  };
-  
-  const position = selectedVnb ? getPosition(selectedVnb) : null;
 
   return (
     <Card className="h-full">
@@ -81,20 +71,30 @@ const BenchmarkPanel = ({ selectedVnbId, onVnbSelect }: BenchmarkPanelProps) => 
             {selectedVnb && (
               <div className="space-y-4">
                 <div className="bg-muted/50 p-4 rounded-lg">
-                  <p className="text-sm font-medium mb-1">Position</p>
-                  <p className="text-2xl font-bold">
-                    {position} von {vnbList.length}
+                  <p className="text-sm font-medium mb-1">Punktzahl</p>
+                  <p className="text-2xl font-bold" style={{ color: getColor(selectedVnb.score) }}>
+                    {selectedVnb.score !== null ? (selectedVnb.score > 0 ? '+' : '') + selectedVnb.score : 'N/A'}
                   </p>
                 </div>
 
                 <div>
                   <h4 className="text-sm font-semibold mb-3">Ranking aller VNB</h4>
                   <div className="relative bg-muted/20 rounded-lg overflow-hidden p-4">
-                    {/* 850 vertical bars visualization */}
+                    {/* All VNBs as vertical bars with score-based height */}
                     <div className="flex items-end justify-start h-32 gap-[1px]">
                       {vnbList.map((vnb) => {
                         const isSelected = vnb.id === selectedVnbId;
                         const score = vnb.score ?? 0;
+                        
+                        // Calculate height based on score (-100 to +100 range)
+                        // Map score to height: 0 or null = 5%, -100 = 5%, +100 = 100%
+                        let heightPercent;
+                        if (vnb.score === null || vnb.score === 0) {
+                          heightPercent = 5; // Minimum height for visibility
+                        } else {
+                          // Map -100...+100 to 5%...100%
+                          heightPercent = 5 + ((vnb.score + 100) / 200) * 95;
+                        }
                         
                         // Hardcoded colors matching map
                         let fillColor = '#E5E7EB'; // No data
@@ -111,9 +111,10 @@ const BenchmarkPanel = ({ selectedVnbId, onVnbSelect }: BenchmarkPanelProps) => 
                             key={vnb.id}
                             className="flex-1 min-w-[1px] transition-all cursor-pointer"
                             style={{
-                              height: isSelected ? '100%' : '75%',
-                              backgroundColor: isSelected ? fillColor : '#D1D5DB',
-                              opacity: isSelected ? 1 : 0.7
+                              height: `${heightPercent}%`,
+                              backgroundColor: fillColor,
+                              opacity: isSelected ? 1 : 0.7,
+                              border: isSelected ? '1px solid #000' : 'none'
                             }}
                             title={`${vnb.name}: ${vnb.score !== null ? (vnb.score > 0 ? '+' : '') + vnb.score : 'N/A'}`}
                             onClick={() => onVnbSelect(vnb.id)}
@@ -124,9 +125,9 @@ const BenchmarkPanel = ({ selectedVnbId, onVnbSelect }: BenchmarkPanelProps) => 
                     
                     {/* Legend below */}
                     <div className="flex justify-between text-xs text-muted-foreground mt-3 px-1">
-                      <span>Beste</span>
-                      <span>Position {position} von {vnbList.length}</span>
-                      <span>Schlechteste</span>
+                      <span>Beste (+100)</span>
+                      <span>{vnbList.length} VNB</span>
+                      <span>Schlechteste (-100)</span>
                     </div>
                   </div>
                   
