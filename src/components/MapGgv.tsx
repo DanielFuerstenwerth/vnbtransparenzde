@@ -20,9 +20,9 @@ const MapGgv = ({ onRegionClick }: MapGgvProps) => {
       attributionControl: false
     }).setView([51.1657, 10.4515], 6);
 
-    // Load dummy GeoJSON and scores
+    // Load real GeoJSON and scores
     Promise.all([
-      fetch('/data/vnb_regions_dummy.geojson').then(r => r.json()),
+      fetch('/data/vnb_regions.geojson').then(r => r.json()),
       loadScores('/data/scores_ggv_extended.csv')
     ]).then(([geoData, scoresMap]) => {
       if (!map.current) return;
