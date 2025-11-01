@@ -19,25 +19,24 @@ const Impressum = () => {
                 1000 GW GmbH
                 <br />
                 Rollbergstraße 28a <br />
-                12053
+                12053 Berlin
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold mb-4">Kontakt</h2>
               <p className="text-muted-foreground">
-                E-Mail: [kontakt@vnb-transparenz.de]
+                E-Mail: [kontakt@vnb-transparenz.de vorläufig: daniel@1000gw.de]
                 <br />
-                Telefon: [+49 ...]
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold mb-4">Verantwortlich für den Inhalt</h2>
               <p className="text-muted-foreground">
-                [Name]
+                [Daniel Fürstenwerth, 1000 GW GmbH]
                 <br />
-                [Anschrift]
+                [Rollbergstraße 28a, 12053 Berlin]
               </p>
             </section>
 
