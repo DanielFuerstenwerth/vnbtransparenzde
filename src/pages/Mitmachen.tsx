@@ -79,14 +79,11 @@ const Mitmachen = () => {
             </CardHeader>
             <CardContent>
               <p className="mb-6 opacity-90">
-                Die Umfragen werden bald starten, Inhalte und Auswertungen können von Kooperationspartnern vorgeschlagen
-                werden und erfordern Dateninput. Registrieren Sie sich für Updates (Link folgt) oder kontaktieren Sie
-                uns per Email direkt.
+                Der Survey wird in Kürze verfügbar sein. Registrieren Sie sich für Updates oder kontaktieren Sie uns
+                direkt.
               </p>
               <Button variant="secondary" size="lg">
-                Dateneingabe (wird 2026 aktiviert) Dateineingabe für Datensammlung für Gemeinschaftliche
-                Gebäudeversorgung, zeitvariable Netzentgelte (Modul 3 §14a EnWG) und Mieterstrom erfolgen derzeit unter
-                https://1000gw.de/projekte/
+                Dateneingabe (wird 2026 aktiviert)
               </Button>
             </CardContent>
           </Card>
