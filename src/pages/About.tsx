@@ -44,7 +44,7 @@ const About = () => {
                 <li>Die Energiewende beschleunigen</li>
                 <li>Best Practices sichtbar machen</li>
                 <li>Regulierungsbehörden bessere Datengrundlagen geben</li>
-                <li>Öffentlichen Druck auf ineffiziente VNBs aufbauen</li>
+                <li>Öffentlichen Druck auf ineffiziente VNBs unterstützen</li>
               </ul>
             </CardContent>
           </Card>
