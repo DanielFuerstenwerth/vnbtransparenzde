@@ -34,9 +34,9 @@ const Impressum = () => {
             <section>
               <h2 className="text-2xl font-bold mb-4">Verantwortlich für den Inhalt</h2>
               <p className="text-muted-foreground">
-                [Daniel Fürstenwerth, 1000 GW GmbH]
+                Daniel Fürstenwerth, 1000 GW GmbH
                 <br />
-                [Rollbergstraße 28a, 12053 Berlin]
+                Rollbergstraße 28a, 12053 Berlin
               </p>
             </section>
 
