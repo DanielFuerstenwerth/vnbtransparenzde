@@ -31,7 +31,7 @@ Mit dieser Plattform wollen wir die Performance der >800 deutschen Verteilnetzbe
 Wir bewerten sie in verschiedenen Kategorien:
 
 1. **Elektrifizierung der Haushalte**: Wie werden Haushalte unterstützt, Teil des neuen Energiesystems zu werden?
-2. **Teilhabe an der Energiewende**: Wie werden Möglichkeiten zur Teilhabe der Bevölkerunng unterstützt?
+2. **Teilhabe an der Energiewende**: Wie werden Möglichkeiten zur Teilhabe der Bevölkerung unterstützt?
 3. **Elektrifizierung im Gewerbe**: Wie effizient und günstig können Unternehmen Elektrifizierungstechnologien und erneuerbare Energien anschliessen
 4. **Netzanschlüsse in der Hochspannung**: Wie schnell werden neue große Verbraucher und Erzeuger angschlossen, inwiefern kommen innovative Konzepte und Prozesse zum Einsatz?
 
