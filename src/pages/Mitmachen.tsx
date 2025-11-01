@@ -66,8 +66,7 @@ const Mitmachen = () => {
                 <div>
                   <h3 className="font-semibold mb-1">Review & Veröffentlichung</h3>
                   <p className="text-sm text-muted-foreground">
-                    Wir prüfen die Eingaben, aggregieren die Daten und aktualisieren die VNB-Scores. Alle Änderungen
-                    sind im Changelog nachvollziehbar.
+                    Wir prüfen die Eingaben, aggregieren die Daten und aktualisieren die VNB-Scores.
                   </p>
                 </div>
               </div>
@@ -80,11 +79,14 @@ const Mitmachen = () => {
             </CardHeader>
             <CardContent>
               <p className="mb-6 opacity-90">
-                Der Survey wird in Kürze verfügbar sein. Registrieren Sie sich für Updates oder kontaktieren Sie uns
-                direkt.
+                Die Umfragen werden bald starten, Inhalte und Auswertungen können von Kooperationspartnern vorgeschlagen
+                werden und erfordern Dateninput. Registrieren Sie sich für Updates (Link folgt) oder kontaktieren Sie
+                uns per Email direkt.
               </p>
               <Button variant="secondary" size="lg">
-                Dateneingabe (wird 2026 aktiviert)
+                Dateneingabe (wird 2026 aktiviert) Dateineingabe für Datensammlung für Gemeinschaftliche
+                Gebäudeversorgung, zeitvariable Netzentgelte (Modul 3 §14a EnWG) und Mieterstrom erfolgen derzeit unter
+                https://1000gw.de/projekte/
               </Button>
             </CardContent>
           </Card>
