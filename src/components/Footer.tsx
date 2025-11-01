@@ -64,6 +64,7 @@ const Footer = () => {
         
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} VNB-Transparenz. Keine amtliche Stelle.</p>
+          <p className="mt-2 text-xs">Version: {new Date().toISOString()}</p>
         </div>
       </div>
     </footer>;
