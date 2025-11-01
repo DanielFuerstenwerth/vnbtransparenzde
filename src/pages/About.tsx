@@ -1,10 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-
 const About = () => {
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Header />
       
       <main id="main-content" className="flex-1 container mx-auto px-4 py-12">
@@ -41,14 +39,12 @@ const About = () => {
                 Projektierer warten Monate auf Netzanschlüsse, Kommunen haben keine Vergleichsmöglichkeiten, 
                 und Best Practices bleiben unsichtbar.
               </p>
-              <p className="text-muted-foreground">
-                Mit dieser Plattform wollen wir:
-              </p>
+              <p className="text-muted-foreground">Mit dieser Plattform wollen wir:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-muted-foreground">
-                <li>Öffentlichen Druck auf ineffiziente VNBs aufbauen</li>
+                <li>Die Energiewende beschleunigen</li>
                 <li>Best Practices sichtbar machen</li>
                 <li>Regulierungsbehörden bessere Datengrundlagen geben</li>
-                <li>Die Energiewende beschleunigen</li>
+                <li>Öffentlichen Druck auf ineffiziente VNBs aufbauen</li>
               </ul>
             </CardContent>
           </Card>
@@ -102,8 +98,6 @@ const About = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default About;
