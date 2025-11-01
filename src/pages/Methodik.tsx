@@ -110,7 +110,6 @@ const Methodik = () => {
             </CardHeader>
             <CardContent>
               <ul className="space-y-2 text-muted-foreground">
-                <li>Bei fehlenden Daten wird &quot;keine Daten&quot; angezeigt (grau).</li>
                 <li>• Öffentliche VNB-Websites (Antragsformulare, Prozessbeschreibungen)</li>
                 <li>• Offizielle Berichte (BNetzA, Landesregulierungsbehörden)</li>
                 <li>• Medienberichte und Recherchen</li>
@@ -130,9 +129,9 @@ const Methodik = () => {
                 <div>
                   <div className="text-sm font-semibold">v0.1 – 2025-10-20</div>
                   <p className="text-sm text-muted-foreground">
-                    Version 0.1 Kategoriesierung aktualisiert auf 4 Kategorien fokussiert auf Benutzergruppen. Version
-                    0.1 (Dummy) Initiale Version: 3 Kategorien definiert, Scoring-System festgelegt, MVP-Struktur mit
-                    Dummy-Daten.
+                    v0.1 - 2025-11-01 Kategoriesierung aktualisiert auf 4 Kategorien fokussiert auf Benutzergruppen.
+                    v0.1 – 2025-10-20(Dummy) Initiale Version: 3 Kategorien definiert, Scoring-System festgelegt,
+                    MVP-Struktur mit Dummy-Daten.
                   </p>
                 </div>
               </div>
