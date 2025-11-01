@@ -7,7 +7,7 @@ const Mitmachen = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main id="main-content" className="flex-1 container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold mb-8">Mitmachen & Daten liefern</h1>
 
@@ -18,12 +18,13 @@ const Mitmachen = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                VNB-Transparenz lebt von den Erfahrungen der Community. Als Projektierer, 
-                Installateur oder Anlagenbetreiber kennen Sie die Realität vor Ort am besten.
+                VNB-Transparenz lebt von den Erfahrungen der Community. Als Projektentwickler, Anbieter von Hardware,
+                Anbieter von Software, innovativer Energie- oder Dienstleistungsanbieter, Anlagenbetreiber oder
+                Letztverbraucher kennen Sie die Realität vor Ort am besten.
               </p>
               <p className="text-muted-foreground">
-                Ihre Eingaben helfen uns, ein realistisches Bild der VNB-Performance zu zeichnen 
-                und öffentlichen Druck für Verbesserungen aufzubauen.
+                Ihre Eingaben helfen uns, ein realistisches Bild der VNB-Performance zu zeichnen und öffentlichen Druck
+                für Verbesserungen zu unterstützen.
               </p>
             </CardContent>
           </Card>
@@ -40,8 +41,7 @@ const Mitmachen = () => {
                 <div>
                   <h3 className="font-semibold mb-1">Survey ausfüllen</h3>
                   <p className="text-sm text-muted-foreground">
-                    Beantworten Sie Fragen zu Ihren Erfahrungen mit einem VNB 
-                    (Anschlussdauer, Digitalisierung, Flexibilität).
+                    Beantworten Sie Fragen zu Ihren Erfahrungen mit einem VNB entlang der abgefragten Dimensionen.
                   </p>
                 </div>
               </div>
@@ -53,8 +53,8 @@ const Mitmachen = () => {
                 <div>
                   <h3 className="font-semibold mb-1">Evidenzen hochladen</h3>
                   <p className="text-sm text-muted-foreground">
-                    Optional: Fügen Sie Belege hinzu (E-Mails, Screenshots, Dokumente) – 
-                    natürlich ohne personenbezogene Daten.
+                    Optional: Fügen Sie Belege hinzu (E-Mails, Screenshots, Dokumente) – natürlich ohne personenbezogene
+                    Daten.
                   </p>
                 </div>
               </div>
@@ -66,8 +66,8 @@ const Mitmachen = () => {
                 <div>
                   <h3 className="font-semibold mb-1">Review & Veröffentlichung</h3>
                   <p className="text-sm text-muted-foreground">
-                    Wir prüfen die Eingaben, aggregieren die Daten und aktualisieren die VNB-Scores. 
-                    Alle Änderungen sind im Changelog nachvollziehbar.
+                    Wir prüfen die Eingaben, aggregieren die Daten und aktualisieren die VNB-Scores. Alle Daten werden
+                    zukünftig Open Source sein und per API für weitere Auswertungen und Darstellungen verfügbar sein.
                   </p>
                 </div>
               </div>
@@ -80,8 +80,8 @@ const Mitmachen = () => {
             </CardHeader>
             <CardContent>
               <p className="mb-6 opacity-90">
-                Der Survey wird in Kürze verfügbar sein. Registrieren Sie sich für Updates 
-                oder kontaktieren Sie uns direkt.
+                Erste Erhebungen sollen in 2026 starten. Registrieren Sie sich für Updates oder kontaktieren Sie uns
+                direkt.
               </p>
               <Button variant="secondary" size="lg">
                 Survey öffnen (coming soon)
@@ -98,7 +98,6 @@ const Mitmachen = () => {
                 <li>✓ Alle Eingaben werden anonymisiert</li>
                 <li>✓ Keine personenbezogenen Daten werden gespeichert</li>
                 <li>✓ Optional: Kontaktdaten nur für Rückfragen (getrennt gespeichert)</li>
-                <li>✓ Evidenzen werden auf PII geprüft</li>
               </ul>
             </CardContent>
           </Card>
