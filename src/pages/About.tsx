@@ -2,9 +2,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 const About = () => {
-  return <div className="min-h-screen flex flex-col">
+  return (
+    <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main id="main-content" className="flex-1 container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold mb-8">Über VNB-Transparenz</h1>
 
@@ -15,12 +16,12 @@ const About = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                VNB-Transparenz ist eine unabhängige Initiative zur Schaffung von Transparenz 
-                über die Performance deutscher Verteilnetzbetreiber.
+                VNB-Transparenz ist eine unabhängige Initiative zur Schaffung von Transparenz über die Performance
+                deutscher Verteilnetzbetreiber.
               </p>
               <p className="text-muted-foreground">
-                Wir sind keine amtliche Stelle, sondern eine Community-getriebene Plattform, 
-                die auf offenen Daten und Erfahrungsberichten basiert.
+                Wir sind keine amtliche Stelle, sondern eine Community-getriebene Plattform, die auf offenen Daten und
+                Erfahrungsberichten basiert.
               </p>
             </CardContent>
           </Card>
@@ -31,13 +32,12 @@ const About = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                Die Energiewende ist eine der größten gesellschaftlichen Aufgaben unserer Zeit. 
-                Verteilnetzbetreiber spielen dabei eine zentrale Rolle – doch ihre Performance 
-                ist oft intransparent.
+                Die Energiewende ist eine der größten gesellschaftlichen Aufgaben unserer Zeit. Verteilnetzbetreiber
+                spielen dabei eine zentrale Rolle – doch ihre Performance ist oft intransparent.
               </p>
               <p className="text-muted-foreground mb-4">
-                Projektierer warten Monate auf Netzanschlüsse, Kommunen haben keine Vergleichsmöglichkeiten, 
-                und Best Practices bleiben unsichtbar.
+                Projektierer warten Monate auf Netzanschlüsse, Kommunen haben keine Vergleichsmöglichkeiten, und Best
+                Practices bleiben unsichtbar.
               </p>
               <p className="text-muted-foreground">Mit dieser Plattform wollen wir:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-muted-foreground">
@@ -55,12 +55,16 @@ const About = () => {
             </CardHeader>
             <CardContent className="space-y-3">
               <div>
-                <h3 className="font-semibold mb-1"> Transparenz</h3>
-                <p className="text-sm text-muted-foreground">Unsere Methodik ist transparent, Diskussionen werden perspektivisch öffentlich geführt.</p>
+                <h3 className="font-semibold mb-1">Transparenz</h3>
+                <p className="text-sm text-muted-foreground">
+                  Unsere Methodik ist transparent, Diskussionen werden perspektivisch öffentlich geführt.
+                </p>
               </div>
               <div>
                 <h3 className="font-semibold mb-1">Fairness</h3>
-                <p className="text-sm text-muted-foreground">VNBs haben ein Right-to-Reply. Wir korrigieren Fehler zeitnah.</p>
+                <p className="text-sm text-muted-foreground">
+                  VNBs haben ein Right-to-Reply. Wir korrigieren Fehler zeitnah.
+                </p>
               </div>
               <div>
                 <h3 className="font-semibold mb-1">Evidenzbasiert</h3>
@@ -78,9 +82,7 @@ const About = () => {
               <CardTitle>Kontakt</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground mb-2">
-                Für Fragen, Anregungen oder Kooperationsanfragen:
-              </p>
+              <p className="text-muted-foreground mb-2">Für Fragen, Anregungen oder Kooperationsanfragen:</p>
               <p className="text-muted-foreground">kontakt@vnb-transparenz.de (vorläufig: daniel@1000gw.de)</p>
             </CardContent>
           </Card>
@@ -88,6 +90,7 @@ const About = () => {
       </main>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
 export default About;
