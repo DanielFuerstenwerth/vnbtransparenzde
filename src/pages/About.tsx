@@ -55,28 +55,20 @@ const About = () => {
             </CardHeader>
             <CardContent className="space-y-3">
               <div>
-                <h3 className="font-semibold mb-1">🔍 Transparenz</h3>
-                <p className="text-sm text-muted-foreground">
-                  Unsere Methodik ist öffentlich, alle Änderungen nachvollziehbar.
-                </p>
+                <h3 className="font-semibold mb-1"> Transparenz</h3>
+                <p className="text-sm text-muted-foreground">Unsere Methodik ist transparent, Diskussionen werden perspektivisch öffentlich geführt.</p>
               </div>
               <div>
-                <h3 className="font-semibold mb-1">⚖️ Fairness</h3>
-                <p className="text-sm text-muted-foreground">
-                  VNBs haben ein Right-to-Reply. Wir korrigieren Fehler schnell.
-                </p>
+                <h3 className="font-semibold mb-1">Fairness</h3>
+                <p className="text-sm text-muted-foreground">VNBs haben ein Right-to-Reply. Wir korrigieren Fehler zeitnah.</p>
               </div>
               <div>
-                <h3 className="font-semibold mb-1">📊 Evidenzbasiert</h3>
-                <p className="text-sm text-muted-foreground">
-                  Bewertungen basieren auf nachprüfbaren Quellen.
-                </p>
+                <h3 className="font-semibold mb-1">Evidenzbasiert</h3>
+                <p className="text-sm text-muted-foreground">Bewertungen basieren auf vertrauenswerten Quellen.</p>
               </div>
               <div>
-                <h3 className="font-semibold mb-1">🛡️ Datenschutz</h3>
-                <p className="text-sm text-muted-foreground">
-                  Keine personenbezogenen Daten, keine Tracking-Cookies.
-                </p>
+                <h3 className="font-semibold mb-1">Datenschutz</h3>
+                <p className="text-sm text-muted-foreground">Keine personenbezogenen Daten.</p>
               </div>
             </CardContent>
           </Card>
@@ -89,9 +81,7 @@ const About = () => {
               <p className="text-muted-foreground mb-2">
                 Für Fragen, Anregungen oder Kooperationsanfragen:
               </p>
-              <p className="text-muted-foreground">
-                kontakt@vnb-transparenz.de (Platzhalter)
-              </p>
+              <p className="text-muted-foreground">kontakt@vnb-transparenz.de (vorläufig: daniel@1000gw.de)</p>
             </CardContent>
           </Card>
         </div>
