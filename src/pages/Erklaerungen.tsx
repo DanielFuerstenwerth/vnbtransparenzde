@@ -20,15 +20,6 @@ const Erklaerungen = () => {
                 Anschlussnehmern. Hier soll in Zukunft für die verschiedenen Aufgabenbereiche ein Überblick gegeben
                 werden: denn nicht alles, was ein Netzkunde sich wünscht, muss auch die Pflicht des VNB sein.
               </p>
-              <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                <li>Anspruch auf diskriminierungsfreien Netzzugang (EnWG §20)</li>
-                <li>Informationsrechte zur Netzanschlusskapazität</li>
-                <li>Fristen für Angebotserstellung</li>
-                <li>Beschwerdewege bei Verzögerungen</li>
-              </ul>
-              <p className="text-sm text-muted-foreground italic mt-4">
-                [Platzhalter – wird in Kürze mit detaillierten Leitfäden gefüllt]
-              </p>
             </CardContent>
           </Card>
 
