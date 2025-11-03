@@ -2,9 +2,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 const Erklaerungen = () => {
-  return <div className="min-h-screen flex flex-col">
+  return (
+    <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main id="main-content" className="flex-1 container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold mb-8">Erklärungen & Rechte</h1>
 
@@ -15,7 +16,9 @@ const Erklaerungen = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground">
-                Verteilnetzbetreiber haben verschiedene Pflichten gegenüber Projektierern, Anlagenbetreibern und Anschlussnehmern. Hier werden für die verschiedenen Aufgabenbereiche ein Überblick gegeben werden:
+                Verteilnetzbetreiber haben verschiedene Pflichten gegenüber Projektierern, Anlagenbetreibern und
+                Anschlussnehmern. Hier soll in Zukunft für die verschiedenen Aufgabenbereiche ein Überblick gegeben
+                werden: denn nicht alles, was ein Netzkunde sich wünscht, muss auch die Pflicht des VNB sein.
               </p>
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                 <li>Anspruch auf diskriminierungsfreien Netzzugang (EnWG §20)</li>
@@ -34,12 +37,8 @@ const Erklaerungen = () => {
               <CardTitle>Links zu Leitfäden und weiteren Informationen für die betrachteten Themen</CardTitle>
             </CardHeader>
             <CardContent>
-              
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                 <li>Musteranträge für Netzanschluss</li>
-                
-                
-                
               </ul>
               <p className="text-sm text-muted-foreground italic mt-4">
                 [Platzhalter – Templates werden sukzessive ergänzt]
@@ -58,7 +57,6 @@ const Erklaerungen = () => {
               </div>
               <div>
                 <h3 className="font-semibold mb-2">...</h3>
-                
               </div>
             </CardContent>
           </Card>
@@ -66,6 +64,7 @@ const Erklaerungen = () => {
       </main>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
 export default Erklaerungen;
