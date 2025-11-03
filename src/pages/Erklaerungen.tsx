@@ -29,11 +29,9 @@ const Erklaerungen = () => {
             </CardHeader>
             <CardContent>
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                <li>Musteranträge für Netzanschluss</li>
+                <li>Hier sollen in Zukunft Links zu Leitfäden und anderen relevanten Dokumenten zu finden sein</li>
               </ul>
-              <p className="text-sm text-muted-foreground italic mt-4">
-                [Platzhalter – Templates werden sukzessive ergänzt]
-              </p>
+              <p className="text-sm text-muted-foreground italic mt-4"></p>
             </CardContent>
           </Card>
 
