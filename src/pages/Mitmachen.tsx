@@ -79,8 +79,8 @@ const Mitmachen = () => {
             </CardHeader>
             <CardContent>
               <p className="mb-6 opacity-90">
-                Der Survey wird in Kürze verfügbar sein. Registrieren Sie sich für Updates oder kontaktieren Sie uns
-                direkt.
+                Die ersten Umfragen werden hier bald verfügbar sein. Registrieren Sie sich für Updates oder kontaktieren
+                Sie uns direkt.
               </p>
               <Button variant="secondary" size="lg">
                 Dateneingabe (wird 2026 aktiviert)
