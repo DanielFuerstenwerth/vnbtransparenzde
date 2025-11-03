@@ -38,7 +38,7 @@ const Mitmachen = () => {
                   1
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Survey ausfüllen</h3>
+                  <h3 className="font-semibold mb-1">Umfrage ausfüllen</h3>
                   <p className="text-sm text-muted-foreground">
                     Beantworten Sie Fragen zu Ihren Erfahrungen mit einem VNB (Anschlussdauer, Digitalisierung,
                     Flexibilität).
