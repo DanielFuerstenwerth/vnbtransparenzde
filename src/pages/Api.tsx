@@ -39,8 +39,6 @@ VNB001,digitalisierung,,,,,unknown,""
               <p className="text-muted-foreground mb-4">
                 Eine REST-API für programmatischen Zugriff ist in Planung. Geplante Endpoints:
               </p>
-        
-              </p>
             </CardContent>
           </Card>
 
