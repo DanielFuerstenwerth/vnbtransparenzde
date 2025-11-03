@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 const NewsDetail = () => {
   const { slug } = useParams();
 
-  // Dummy content - will be replaced with Markdown loader
-  const article = {
-    title: "Warum VNB-Transparenz jetzt zählt",
-    date: "2025-10-20",
-    author: "VNB-Transparenz Team",
-    content: `
+  const articles: Record<string, { title: string; date: string; author: string; content: string }> = {
+    "warum-vnb-transparenz": {
+      title: "Warum VNB-Transparenz jetzt zählt",
+      date: "2025-10-20",
+      author: "VNB-Transparenz Team",
+      content: `
 Die Energiewende steht und fällt mit der Geschwindigkeit, mit der Elektrifzierungstechnologien, Flexibilitäten und erneuerbare Energien an das Netz angeschlossen werden. 
 Verteilnetzbetreiber (VNB) spielen dabei eine zentrale Rolle – doch ihre Performance ist für die Geschäftsführer, Eigentümer, Energieverbraucher, Projektentwickler, 
 und die lokale Öffentlichkeit derzeit nicht nachvollziehbar.
@@ -41,8 +41,47 @@ In den kommenden Wochen veröffentlichen wir ein ausführliches Hintergrundpapie
 Parallel bauen wir die Datenbank aus – und dabei sind wir auf Ihre Hilfe angewiesen.
 
 **Haben Sie Erfahrungen mit einem VNB gemacht?** [Teilen Sie Ihre Daten mit uns →](/mitmachen)
-    `,
+      `,
+    },
+    "methodik-v0-1": {
+      title: "Unsere Methodik v0.1",
+      date: "2025-10-18",
+      author: "VNB-Transparenz Team",
+      content: `
+Mit der Methodik v0.1 haben wir einen ersten Rahmen geschaffen, um die Performance deutscher Verteilnetzbetreiber messbar und vergleichbar zu machen.
+
+## Die Kategorien
+
+Wir bewerten VNBs in vier Hauptkategorien:
+
+1. **Elektrifizierung der Haushalte**
+2. **Teilhabe an der Energiewende**
+3. **Elektrifizierung im Gewerbe**
+4. **Netzanschlüsse in der Hochspannung**
+
+## Scoring-System
+
+Jede Kategorie wird mit 0-100 Punkten bewertet. Die Gesamtnote ergibt sich aus dem gewichteten Durchschnitt aller Kategorien.
+
+## Datenquellen
+
+Unsere Bewertungen basieren auf:
+
+- Öffentlich verfügbaren Daten der Bundesnetzagentur
+- Informationen aus VNB-Webseiten und Preisblättern
+- Community-Feedback von Netzkunden
+- Auswertung von Anschlusszeiten und Prozessen
+
+## Nächste Schritte
+
+Die Methodik wird kontinuierlich weiterentwickelt. Feedback ist ausdrücklich erwünscht.
+
+**Haben Sie Vorschläge zur Methodik?** [Kontaktieren Sie uns →](/mitmachen)
+      `,
+    },
   };
+
+  const article = articles[slug || ""] || articles["warum-vnb-transparenz"];
 
   return (
     <div className="min-h-screen flex flex-col">
