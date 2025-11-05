@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
+import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -55,6 +56,7 @@ const VnbDetail = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Banner />
       <Header />
       
       <main id="main-content" className="flex-1 container mx-auto px-4 py-12">

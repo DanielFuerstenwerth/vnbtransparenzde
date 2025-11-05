@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "@/components/Header";
+import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import CategoryTabs from "@/components/CategoryTabs";
 import SubcategoryTabs from "@/components/SubcategoryTabs";
@@ -8,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 const Direktvermarktung = () => {
   const [activeCategory, setActiveCategory] = useState("dezentrale-ew");
   return <div className="min-h-screen flex flex-col">
+      <Banner />
       <Header />
       <CategoryTabs activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
       <SubcategoryTabs activeSubcategory="direktvermarktung" />

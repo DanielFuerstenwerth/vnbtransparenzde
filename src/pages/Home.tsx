@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
+import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import CategoryTabs from "@/components/CategoryTabs";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Banner />
       <Header />
       <CategoryTabs activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
       

@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
+import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 
@@ -85,6 +86,7 @@ Die Methodik wird kontinuierlich weiterentwickelt. Feedback ist ausdrücklich er
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Banner />
       <Header />
 
       <main id="main-content" className="flex-1">
