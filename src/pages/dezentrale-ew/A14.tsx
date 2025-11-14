@@ -1,13 +1,29 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import Header from "@/components/Header";
 import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import CategoryTabs from "@/components/CategoryTabs";
 import SubcategoryTabs from "@/components/SubcategoryTabs";
-import ComingSoonCard from "@/components/ComingSoonCard";
+import MapA14, { MapA14Handle } from "@/components/MapA14";
+import MapLegendA14 from "@/components/MapLegendA14";
+import BenchmarkPanel from "@/components/BenchmarkPanel";
 import { Card, CardContent } from "@/components/ui/card";
 const A14 = () => {
   const [activeCategory, setActiveCategory] = useState("dezentrale-ew");
+  const [selectedVnbId, setSelectedVnbId] = useState<string | null>(null);
+  const mapRef = useRef<MapA14Handle>(null);
+
+  const handleRegionClick = useCallback((vnbId: string, vnbName: string) => {
+    setSelectedVnbId(vnbId);
+  }, []);
+
+  const handleVnbSelect = (vnbId: string | null) => {
+    setSelectedVnbId(vnbId);
+    if (vnbId && mapRef.current) {
+      mapRef.current.zoomToVnb(vnbId);
+    }
+  };
+
   return <div className="min-h-screen flex flex-col">
       <Banner />
       <Header />
@@ -19,17 +35,16 @@ const A14 = () => {
           <h1 className="text-3xl font-bold mb-6">§14a EnWG - Steuerbare Verbrauchseinrichtungen</h1>
           
           <div className="grid lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-7">
-              <div className="w-full rounded-lg border border-border bg-muted/30 flex items-center justify-center" style={{
-              height: '70vh',
-              minHeight: '500px'
-            }} role="img" aria-label="Platzhalter für zukünftige Karte">
-                <p className="text-muted-foreground">folgt</p>
-              </div>
+            <div className="lg:col-span-7 space-y-4">
+              <MapA14 ref={mapRef} onRegionClick={handleRegionClick} />
+              <MapLegendA14 />
             </div>
 
             <div className="lg:col-span-5">
-              <ComingSoonCard />
+              <BenchmarkPanel 
+                selectedVnbId={selectedVnbId}
+                onVnbSelect={handleVnbSelect}
+              />
               
               <Card className="mt-6">
                 <CardContent className="pt-6">
